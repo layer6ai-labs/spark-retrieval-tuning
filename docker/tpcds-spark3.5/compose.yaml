@@ -1,0 +1,39 @@
+services:
+  spark-master:
+    image: spark-tuning-spark3.5:latest
+    ports:
+      # spark UI
+      - "8080:8080"
+      - "7077:7077"
+
+      # hdfs port
+      - "9000:9000"
+
+      # hadoop UI
+      - "9870:9870"
+    command: /bin/bash -c "/opt/spark/sbin/start-master.sh && service ssh start && echo 'Y' | /opt/hadoop/bin/hdfs namenode -format && /opt/hadoop/sbin/start-dfs.sh && tail -f /dev/null"
+    mem_limit: 10g
+    cpus: 5
+
+  spark-worker:
+    image: spark-tuning-spark3.5:latest
+    command: /bin/bash -c "/opt/spark/sbin/start-worker.sh spark://spark-master:7077;  tail -f /dev/null"
+    depends_on:
+      - spark-master
+    scale: 3
+    mem_limit: 70g
+    cpus: 10
+
+  tpcds:
+    image: spark-tuning-spark3.5-tpcds:latest
+    build: .
+    command: /bin/bash -c "tail -f /dev/null"
+    mem_limit: 10g
+    cpus: 5
+    ports:
+      - "4040:4040"
+    depends_on:
+      - spark-master
+      - spark-worker
+    volumes:
+      - /mnt/spark_tuning:/mnt/spark_tuning

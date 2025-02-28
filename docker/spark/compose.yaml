@@ -1,0 +1,14 @@
+services:
+  spark-master:
+    image: spark-image:1
+    build: .
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+    command: /bin/bash -c "/opt/spark/sbin/start-master.sh;  tail -f /dev/null"
+  spark-worker:
+    image: spark-image:1
+    command: /bin/bash -c "/opt/spark/sbin/start-worker.sh spark://spark-master:7077;  tail -f /dev/null"
+    depends_on:
+      - spark-master
+    scale: 2
