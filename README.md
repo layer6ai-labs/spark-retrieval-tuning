@@ -112,5 +112,10 @@ You can view the results in `tpcds-spark/output_result` directory.
 8. go into `spark-tuning` and do `pip install -r requirements.txt`
 9. go into the training directory and run the scripts you need to
 
+# Data
+The raw data containing 19360 spark application executions with varying configuration parameters is publicly available at `s3://l6lab/sparktune/raw`. In it, you will find `data_<tpch|tpcds>_<100g|250g|500g|750g>_<query>_emr_<trial_number>` 
+which contains the execution metrics, logical plans, and execution runtime of that specific run. There is also `<tpch|tpcds>_<100g|250g|500g|750g>_<query>_emr.db`
+which contains optuna trials data, indicating the spark configuration parameters that the trial was executed with.
+
 # License
 This data and code is licensed under the MIT License, copyright by Layer 6 AI.
