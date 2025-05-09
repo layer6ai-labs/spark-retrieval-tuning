@@ -4,7 +4,7 @@
 
 # Zero-Execution Retrieval-Augmented Configuration Tuning of Spark Applications 
 
-This repo experiments on various spark config tuning methods.
+This repo experiments on various spark config tuning methods as presented in [*Zero-Execution Retrieval-Augmented Configuration Tuning of Spark Applications*](https://arxiv.org/abs/2503.03826).
 
 To start up a spark cluster, run:
 ```
@@ -116,6 +116,21 @@ You can view the results in `tpcds-spark/output_result` directory.
 The raw data containing 19360 spark application executions with varying configuration parameters is publicly available at `s3://l6lab/sparktune/raw`. In it, you will find `data_<tpch|tpcds>_<100g|250g|500g|750g>_<query>_emr_<trial_number>` 
 which contains the execution metrics, logical plans, and execution runtime of that specific run. There is also `<tpch|tpcds>_<100g|250g|500g|750g>_<query>_emr.db`
 which contains optuna trials data, indicating the spark configuration parameters that the trial was executed with.
+
+# Citing
+
+If you use any part of this repository in your research, please cite the associated paper with the following bibtex entry:
+
+Authors: Raunaq Suri, Ilan Gofman, Guangwei Yu, Jesse C. Cresswell
+
+```
+@article{suri2025zeroexecution,
+  title={Zero-Execution Retrieval-Augmented Configuration Tuning of Spark Applications},
+  author={Suri, Raunaq and Gofman, Ilan and Wei, Guangwei and Cresswell, Jesse C.},
+  journal={arXiv:2503.03826},
+  year={2025}
+}
+```
 
 # License
 This data and code is licensed under the MIT License, copyright by Layer 6 AI.
